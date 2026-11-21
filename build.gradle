@@ -12,5 +12,22 @@ dependencies {
     modImplementation 'net.fabricmc:fabric-loader:0.18.1'
     modImplementation 'net.fabricmc.fabric-api:fabric-api:0.141.1+1.21.11'
 }
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['.']
+            include '**/*.java'
+            exclude 'build/**'
+            exclude '.gradle/**'
+            exclude '.github/**'
+        }
+
+        resources {
+            srcDirs = ['.']
+            include 'fabric.mod.json'
+        }
+    }
+}
 processResources { inputs.property 'version', project.version; filesMatching('fabric.mod.json') { expand 'version': project.version } }
 java { toolchain { languageVersion = JavaLanguageVersion.of(21) }; withSourcesJar() }
