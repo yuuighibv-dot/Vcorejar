@@ -1,0 +1,46 @@
+name: Build VCore JAR
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Setup Gradle 9.2.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.2.1'
+
+      - name: Build VCore
+        shell: bash
+        run: |
+          if [ -f build.gradle ]; then
+            echo "Building from root"
+          elif [ -f vcore_rebuild/build.gradle ]; then
+            cd vcore_rebuild
+          else
+            echo "ERROR: build.gradle not found"
+            exit 1
+          fi
+
+          gradle --no-daemon --stacktrace clean build
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: VCore-JAR
+          path: '**/build/libs/*.jar'
+          if-no-files-found: error
