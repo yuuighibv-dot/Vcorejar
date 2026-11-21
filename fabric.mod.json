@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "id": "vcore_rebuild",
+  "version": "${version}",
+  "name": "VCore Rebuild",
+  "description": "A clean Fabric 1.21.11 rebuild scaffold inspired by the uploaded V-Core assets.",
+  "environment": "client",
+  "entrypoints": { "client": ["com.rebuild.vcore.VCoreClient"] },
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "=1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
