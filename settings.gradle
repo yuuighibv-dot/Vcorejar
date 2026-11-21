@@ -8,15 +8,4 @@ pluginManagement {
     }
 }
 
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
-
-    repositories {
-        mavenCentral()
-        maven {
-            url = 'https://maven.fabricmc.net/'
-        }
-    }
-}
-
 rootProject.name = 'VCore-Rebuild-1.21.11'
